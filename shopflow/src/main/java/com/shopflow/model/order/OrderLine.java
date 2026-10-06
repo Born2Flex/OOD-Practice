@@ -1,5 +1,6 @@
-package com.shopflow.model;
+package com.shopflow.model.order;
 
+import com.shopflow.model.money.Money;
 
 public record OrderLine(Money unitPrice, int quantity) {
 

@@ -1,6 +1,8 @@
-package com.shopflow.model;
+package com.shopflow.model.order;
 
 import com.shopflow.exception.IllegalOrderTransitionException;
+import com.shopflow.model.money.Money;
+import com.shopflow.model.payment.TransactionId;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

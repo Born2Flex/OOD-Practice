@@ -4,8 +4,8 @@ import com.shopflow.exception.PaymentDeclinedException;
 import com.shopflow.external.stripe.CardException;
 import com.shopflow.external.stripe.PaymentIntent;
 import com.shopflow.external.stripe.StripeClient;
-import com.shopflow.model.Money;
-import com.shopflow.model.TransactionId;
+import com.shopflow.model.money.Money;
+import com.shopflow.model.payment.TransactionId;
 
 public class StripeAdapter implements PaymentGateway {
 

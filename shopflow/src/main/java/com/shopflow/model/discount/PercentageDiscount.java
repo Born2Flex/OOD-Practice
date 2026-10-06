@@ -1,7 +1,7 @@
 package com.shopflow.model.discount;
 
-import com.shopflow.model.Money;
-import com.shopflow.model.Percentage;
+import com.shopflow.model.money.Money;
+import com.shopflow.model.money.Percentage;
 
 public record PercentageDiscount(Percentage percentage, Specification<PricingContext> condition) implements Discount {
 

@@ -1,6 +1,6 @@
 package com.shopflow.model.discount;
 
-import com.shopflow.model.CustomerType;
+import com.shopflow.model.customer.CustomerType;
 
 public record CustomerTypeSpecification(CustomerType type) implements Specification<PricingContext> {
 

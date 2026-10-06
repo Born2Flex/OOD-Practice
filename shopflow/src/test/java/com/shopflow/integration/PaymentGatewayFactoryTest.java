@@ -3,7 +3,7 @@ package com.shopflow.integration;
 import com.shopflow.exception.PaymentDeclinedException;
 import com.shopflow.external.paypal.PayPalClient;
 import com.shopflow.external.stripe.StripeClient;
-import com.shopflow.model.Money;
+import com.shopflow.model.money.Money;
 import org.junit.jupiter.api.Test;
 
 import java.util.Currency;

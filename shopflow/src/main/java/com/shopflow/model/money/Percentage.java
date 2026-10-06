@@ -1,4 +1,4 @@
-package com.shopflow.model;
+package com.shopflow.model.money;
 
 import java.math.BigDecimal;
 import java.math.MathContext;

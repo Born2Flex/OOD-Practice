@@ -1,6 +1,6 @@
 package com.shopflow.model.discount;
 
-import com.shopflow.model.Money;
+import com.shopflow.model.money.Money;
 
 import java.util.List;
 

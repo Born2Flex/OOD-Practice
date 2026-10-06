@@ -2,10 +2,10 @@ package com.shopflow.service;
 
 import com.shopflow.exception.IllegalOrderTransitionException;
 import com.shopflow.integration.PaymentGatewayFactory;
-import com.shopflow.model.Customer;
-import com.shopflow.model.Money;
-import com.shopflow.model.Order;
-import com.shopflow.model.TransactionId;
+import com.shopflow.model.customer.Customer;
+import com.shopflow.model.money.Money;
+import com.shopflow.model.order.Order;
+import com.shopflow.model.payment.TransactionId;
 
 public class PaymentService {
 

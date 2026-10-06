@@ -4,8 +4,8 @@ import com.shopflow.exception.PaymentDeclinedException;
 import com.shopflow.external.paypal.CaptureResponse;
 import com.shopflow.external.paypal.PayPalClient;
 import com.shopflow.external.paypal.PayPalOrder;
-import com.shopflow.model.Money;
-import com.shopflow.model.TransactionId;
+import com.shopflow.model.money.Money;
+import com.shopflow.model.payment.TransactionId;
 
 public class PayPalAdapter implements PaymentGateway {
 

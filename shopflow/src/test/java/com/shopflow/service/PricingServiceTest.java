@@ -1,17 +1,17 @@
 package com.shopflow.service;
 
-import com.shopflow.model.Customer;
-import com.shopflow.model.CustomerType;
-import com.shopflow.model.Money;
-import com.shopflow.model.Order;
-import com.shopflow.model.OrderLine;
-import com.shopflow.model.Percentage;
+import com.shopflow.model.customer.Customer;
+import com.shopflow.model.customer.CustomerType;
 import com.shopflow.model.discount.CustomerTypeSpecification;
 import com.shopflow.model.discount.Discount;
 import com.shopflow.model.discount.PercentageDiscount;
 import com.shopflow.model.discount.PricingContext;
 import com.shopflow.model.discount.Specification;
 import com.shopflow.model.discount.StackedDiscount;
+import com.shopflow.model.money.Money;
+import com.shopflow.model.money.Percentage;
+import com.shopflow.model.order.Order;
+import com.shopflow.model.order.OrderLine;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

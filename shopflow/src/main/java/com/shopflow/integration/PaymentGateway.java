@@ -1,7 +1,7 @@
 package com.shopflow.integration;
 
-import com.shopflow.model.Money;
-import com.shopflow.model.TransactionId;
+import com.shopflow.model.money.Money;
+import com.shopflow.model.payment.TransactionId;
 
 public interface PaymentGateway {
 

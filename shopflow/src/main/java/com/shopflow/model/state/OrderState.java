@@ -1,7 +1,7 @@
 package com.shopflow.model.state;
 
 import com.shopflow.exception.IllegalOrderTransitionException;
-import com.shopflow.model.OrderStatus;
+import com.shopflow.model.order.OrderStatus;
 
 public interface OrderState {
 

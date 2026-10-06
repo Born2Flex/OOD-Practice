@@ -1,6 +1,6 @@
 package com.shopflow.exception;
 
-import com.shopflow.model.OrderStatus;
+import com.shopflow.model.order.OrderStatus;
 
 public class IllegalOrderTransitionException extends RuntimeException {
 

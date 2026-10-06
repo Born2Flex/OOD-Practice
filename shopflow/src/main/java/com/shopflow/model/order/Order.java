@@ -1,5 +1,7 @@
-package com.shopflow.model;
+package com.shopflow.model.order;
 
+import com.shopflow.model.money.Money;
+import com.shopflow.model.payment.TransactionId;
 import com.shopflow.model.state.NewState;
 import com.shopflow.model.state.OrderState;
 

@@ -15,14 +15,14 @@
 
 ### Packaging: traditional layers with sub-packages
 - **First version:** by feature inside the model layer (`model.order`, `model.pricing`, `model.payment`, ...).
-- **Now:** regrouped into classic layers to make the structure easier to follow: `model` (with `state` and `discount` sub-packages), `service`, `exception`, `integration` (payment gateway + adapters + factory), and `external` (pretend SDKs).
+- **Now:** regrouped into classic layers to make the structure easier to follow: `model` (with `order`, `customer`, `money`, `payment`, `state` and `discount` sub-packages), `service`, `exception`, `integration` (payment gateway + adapters + factory), and `external` (pretend SDKs).
 - **Trade-off:** a feature like payments is now spread across `model`, `exception`, `integration` and `service`, which goes against the Common Closure Principle. The `PaymentGateway` interface moved out of `model`, so `service` depends on `integration` (classic N-Tier) instead of on an interface the domain owns (Separated Interface).
 
 ### Accepted package cycle (ADP trade-off)
 
 ```mermaid
 graph LR
-    model["model<br/>Order, OrderStatus"]
+    model["model.order<br/>Order, OrderStatus"]
     state["model.state<br/>OrderState + 5 states"]
     exception["exception<br/>IllegalOrderTransitionException"]
 
@@ -32,7 +32,7 @@ graph LR
     exception -->|"message uses OrderStatus"| model
 ```
 
-- **Cycles:** `model ⇄ model.state` and `model → model.state → exception → model`
+- **Cycles:** `model.order ⇄ model.state` and `model.order → model.state → exception → model.order`
 - **Decision:** accepted in the by-feature layout, because the cycle stayed inside one feature.
 - **Cost:** the state classes have to be `public`, so code outside the package can create states. The packages in the cycle can't be understood or changed independently.
 - **If it starts to hurt:** move `OrderStatus` into `model.state`, or make the exception take a plain `String` status, so all dependencies point one way.

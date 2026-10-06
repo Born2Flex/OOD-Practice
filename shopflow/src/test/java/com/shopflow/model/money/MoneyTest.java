@@ -1,4 +1,4 @@
-package com.shopflow.model;
+package com.shopflow.model.money;
 
 import org.junit.jupiter.api.Test;
 
