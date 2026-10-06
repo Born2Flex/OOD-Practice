@@ -19,7 +19,7 @@ public class PaymentService {
 
     public TransactionId pay(Order order, Customer customer) {
         if (!order.canBePaid()) {
-            throw new IllegalOrderTransitionException(order.status(), "pay");
+            throw new IllegalOrderTransitionException(order.status().name(), "pay");
         }
         Money total = pricingService.total(order, customer);
         TransactionId transactionId = gatewayFactory.forCurrency(total.currency()).charge(total);

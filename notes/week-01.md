@@ -29,13 +29,12 @@ graph LR
     model -->|"Order creates NewState"| state
     state -->|"states return OrderStatus"| model
     state -->|"default transitions throw"| exception
-    exception -->|"message uses OrderStatus"| model
 ```
 
-- **Cycles:** `model.order ⇄ model.state` and `model.order → model.state → exception → model.order`
-- **Decision:** accepted in the by-feature layout, because the cycle stayed inside one feature.
-- **Cost:** the state classes have to be `public`, so code outside the package can create states. The packages in the cycle can't be understood or changed independently.
-- **If it starts to hurt:** move `OrderStatus` into `model.state`, or make the exception take a plain `String` status, so all dependencies point one way.
+- **Cycle broken across layers:** `IllegalOrderTransitionException` used to take an `OrderStatus`, which made a cycle `model.order → model.state → exception → model.order` across layers. It now takes a plain `String` status, so `exception` depends on nothing in `model`.
+- **Remaining cycle:** `model.order ⇄ model.state`. Accepted, because both packages belong to the order lifecycle inside the model layer.
+- **Cost:** the state classes have to be `public`, so code outside the package can create states. `model.order` and `model.state` can't be understood or changed independently.
+- **If it starts to hurt:** move `OrderStatus` into `model.state`, so all dependencies point one way.
 
 ---
 

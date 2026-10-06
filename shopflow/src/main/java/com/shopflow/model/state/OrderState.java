@@ -12,18 +12,18 @@ public interface OrderState {
     }
 
     default OrderState pay() {
-        throw new IllegalOrderTransitionException(status(), "pay");
+        throw new IllegalOrderTransitionException(status().name(), "pay");
     }
 
     default OrderState ship() {
-        throw new IllegalOrderTransitionException(status(), "ship");
+        throw new IllegalOrderTransitionException(status().name(), "ship");
     }
 
     default OrderState deliver() {
-        throw new IllegalOrderTransitionException(status(), "deliver");
+        throw new IllegalOrderTransitionException(status().name(), "deliver");
     }
 
     default OrderState cancel() {
-        throw new IllegalOrderTransitionException(status(), "cancel");
+        throw new IllegalOrderTransitionException(status().name(), "cancel");
     }
 }
