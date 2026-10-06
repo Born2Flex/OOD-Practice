@@ -60,6 +60,20 @@ class PaymentServiceTest {
     }
 
     @Test
+    void failingListenerDoesNotFailSuccessfulPayment() {
+        publisher.subscribe(e -> {
+            throw new IllegalStateException("mail server down");
+        });
+        PaymentService payments = new PaymentService(pricing, factory(false), publisher);
+        Order order = order("USD");
+
+        TransactionId transactionId = payments.pay(order, customer);
+
+        assertThat(order.status()).isEqualTo(OrderStatus.PAID);
+        assertThat(order.transactionId()).contains(transactionId);
+    }
+
+    @Test
     void declinedPaymentLeavesOrderNewAndPublishesNothing() {
         PaymentService payments = new PaymentService(pricing, factory(true), publisher);
         Order order = order("EUR");

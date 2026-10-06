@@ -5,6 +5,8 @@ import java.util.List;
 
 public class OrderEventPublisher {
 
+    private static final System.Logger LOG = System.getLogger(OrderEventPublisher.class.getName());
+
     private final List<OrderEventListener> listeners = new ArrayList<>();
 
     public void subscribe(OrderEventListener listener) {
@@ -12,6 +14,12 @@ public class OrderEventPublisher {
     }
 
     public void publish(OrderStatusChanged event) {
-        listeners.forEach(listener -> listener.onStatusChanged(event));
+        for (OrderEventListener listener : listeners) {
+            try {
+                listener.onStatusChanged(event);
+            } catch (RuntimeException e) {
+                LOG.log(System.Logger.Level.ERROR, "Listener %s failed for %s".formatted(listener, event), e);
+            }
+        }
     }
 }

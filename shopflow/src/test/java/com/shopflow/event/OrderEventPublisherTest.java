@@ -30,6 +30,18 @@ class OrderEventPublisherTest {
     }
 
     @Test
+    void failingListenerDoesNotStopOthersOrThePublisher() {
+        List<OrderStatusChanged> received = new ArrayList<>();
+        publisher.subscribe(e -> {
+            throw new IllegalStateException("mail server down");
+        });
+        publisher.subscribe(received::add);
+
+        assertThatCode(() -> publisher.publish(event)).doesNotThrowAnyException();
+        assertThat(received).containsExactly(event);
+    }
+
+    @Test
     void publishingWithoutSubscribersDoesNothing() {
         assertThatCode(() -> publisher.publish(event)).doesNotThrowAnyException();
     }
