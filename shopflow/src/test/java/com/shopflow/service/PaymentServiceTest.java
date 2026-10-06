@@ -1,5 +1,7 @@
 package com.shopflow.service;
 
+import com.shopflow.event.OrderEventPublisher;
+import com.shopflow.event.OrderStatusChanged;
 import com.shopflow.exception.IllegalOrderTransitionException;
 import com.shopflow.exception.PaymentDeclinedException;
 import com.shopflow.external.paypal.PayPalClient;
@@ -13,8 +15,10 @@ import com.shopflow.model.order.Order;
 import com.shopflow.model.order.OrderLine;
 import com.shopflow.model.order.OrderStatus;
 import com.shopflow.model.payment.TransactionId;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,12 +27,19 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class PaymentServiceTest {
 
-    private final Customer customer = new Customer(UUID.randomUUID(), CustomerType.REGULAR);
+    private final Customer customer = new Customer(UUID.randomUUID(), CustomerType.REGULAR, "jane@example.com");
     private final PricingService pricing = new PricingService(StackedDiscount.of());
+    private final OrderEventPublisher publisher = new OrderEventPublisher();
+    private final List<OrderStatusChanged> published = new ArrayList<>();
+
+    @BeforeEach
+    void recordPublishedEvents() {
+        publisher.subscribe(published::add);
+    }
 
     @Test
     void approvedPaymentMarksOrderPaid() {
-        PaymentService payments = new PaymentService(pricing, factory(false));
+        PaymentService payments = new PaymentService(pricing, factory(false), publisher);
         Order order = order("USD");
 
         TransactionId transactionId = payments.pay(order, customer);
@@ -38,17 +49,29 @@ class PaymentServiceTest {
     }
 
     @Test
-    void declinedPaymentLeavesOrderNew() {
-        PaymentService payments = new PaymentService(pricing, factory(true));
+    void approvedPaymentPublishesStatusChange() {
+        PaymentService payments = new PaymentService(pricing, factory(false), publisher);
+        Order order = order("USD");
+
+        payments.pay(order, customer);
+
+        assertThat(published).containsExactly(
+                new OrderStatusChanged(order.id(), customer.id(), OrderStatus.NEW, OrderStatus.PAID));
+    }
+
+    @Test
+    void declinedPaymentLeavesOrderNewAndPublishesNothing() {
+        PaymentService payments = new PaymentService(pricing, factory(true), publisher);
         Order order = order("EUR");
 
         assertThatThrownBy(() -> payments.pay(order, customer)).isInstanceOf(PaymentDeclinedException.class);
         assertThat(order.status()).isEqualTo(OrderStatus.NEW);
+        assertThat(published).isEmpty();
     }
 
     @Test
     void doesNotChargeOrderThatCannotBePaid() {
-        PaymentService payments = new PaymentService(pricing, factory(true));
+        PaymentService payments = new PaymentService(pricing, factory(true), publisher);
         Order order = order("USD");
         order.cancel();
 

@@ -25,8 +25,8 @@ class PricingServiceTest {
     private static final Specification<PricingContext> VIP = new CustomerTypeSpecification(CustomerType.VIP);
     private static final Specification<PricingContext> ANYONE = context -> true;
 
-    private final Customer vip = new Customer(UUID.randomUUID(), CustomerType.VIP);
-    private final Customer regular = new Customer(UUID.randomUUID(), CustomerType.REGULAR);
+    private final Customer vip = new Customer(UUID.randomUUID(), CustomerType.VIP, "vip@example.com");
+    private final Customer regular = new Customer(UUID.randomUUID(), CustomerType.REGULAR, "regular@example.com");
 
     @Test
     void vipGetsPercentageDiscount() {
