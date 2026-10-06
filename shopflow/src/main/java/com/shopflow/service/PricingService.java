@@ -1,10 +1,10 @@
 package com.shopflow.service;
 
-import com.shopflow.model.customer.Customer;
-import com.shopflow.model.money.Money;
-import com.shopflow.model.order.Order;
-import com.shopflow.model.pricing.Discount;
-import com.shopflow.model.pricing.PricingContext;
+import com.shopflow.model.Customer;
+import com.shopflow.model.Money;
+import com.shopflow.model.Order;
+import com.shopflow.model.discount.Discount;
+import com.shopflow.model.discount.PricingContext;
 
 public class PricingService {
 

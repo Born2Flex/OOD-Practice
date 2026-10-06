@@ -13,27 +13,29 @@
 
 ## ShopFlow design notes
 
-### Packaging: by feature inside the model layer
-The top level is split by layer (`model`, `service`). Inside `model`, classes are grouped by feature (`model.order`, and later `model.pricing` and `model.payment`). Within the order feature, they are further split by kind (`state`, `exception`).
+### Packaging: traditional layers with sub-packages
+- **First version:** by feature inside the model layer (`model.order`, `model.pricing`, `model.payment`, ...).
+- **Now:** regrouped into classic layers to make the structure easier to follow: `model` (with `state` and `discount` sub-packages), `service`, `exception`, `integration` (payment gateway + adapters + factory), and `external` (pretend SDKs).
+- **Trade-off:** a feature like payments is now spread across `model`, `exception`, `integration` and `service`, which goes against the Common Closure Principle. The `PaymentGateway` interface moved out of `model`, so `service` depends on `integration` (classic N-Tier) instead of on an interface the domain owns (Separated Interface).
 
-### Accepted package cycle in `model.order` (ADP trade-off)
+### Accepted package cycle (ADP trade-off)
 
 ```mermaid
 graph LR
-    order["model.order<br/>Order, OrderStatus"]
-    state["model.order.state<br/>OrderState + 5 states"]
-    exception["model.order.exception<br/>IllegalOrderTransitionException"]
+    model["model<br/>Order, OrderStatus"]
+    state["model.state<br/>OrderState + 5 states"]
+    exception["exception<br/>IllegalOrderTransitionException"]
 
-    order -->|"Order creates NewState"| state
-    state -->|"states return OrderStatus"| order
+    model -->|"Order creates NewState"| state
+    state -->|"states return OrderStatus"| model
     state -->|"default transitions throw"| exception
-    exception -->|"message uses OrderStatus"| order
+    exception -->|"message uses OrderStatus"| model
 ```
 
-- **Cycles:** `order ⇄ state` and `order → state → exception → order`
-- **Decision:** accept it. The cycle stays inside one feature, so it's tolerated within a feature but must not appear between features.
-- **Cost:** the state classes had to become `public`, so code outside the package can create states. The three sub-packages can't be understood or changed independently.
-- **If it starts to hurt:** move `OrderStatus` (and the exception) into `order.state`, or into a small shared base package, so all dependencies point one way.
+- **Cycles:** `model ⇄ model.state` and `model → model.state → exception → model`
+- **Decision:** accepted in the by-feature layout, because the cycle stayed inside one feature.
+- **Cost:** the state classes have to be `public`, so code outside the package can create states. The packages in the cycle can't be understood or changed independently.
+- **If it starts to hurt:** move `OrderStatus` into `model.state`, or make the exception take a plain `String` status, so all dependencies point one way.
 
 ---
 

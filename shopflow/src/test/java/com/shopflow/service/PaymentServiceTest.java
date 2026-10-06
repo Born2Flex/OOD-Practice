@@ -1,18 +1,18 @@
 package com.shopflow.service;
 
+import com.shopflow.exception.IllegalOrderTransitionException;
+import com.shopflow.exception.PaymentDeclinedException;
 import com.shopflow.external.paypal.PayPalClient;
 import com.shopflow.external.stripe.StripeClient;
-import com.shopflow.infrastructure.payment.PaymentGatewayFactory;
-import com.shopflow.model.customer.Customer;
-import com.shopflow.model.customer.CustomerType;
-import com.shopflow.model.money.Money;
-import com.shopflow.model.order.Order;
-import com.shopflow.model.order.OrderLine;
-import com.shopflow.model.order.OrderStatus;
-import com.shopflow.model.order.exception.IllegalOrderTransitionException;
-import com.shopflow.model.payment.PaymentDeclinedException;
-import com.shopflow.model.payment.TransactionId;
-import com.shopflow.model.pricing.StackedDiscount;
+import com.shopflow.integration.PaymentGatewayFactory;
+import com.shopflow.model.Customer;
+import com.shopflow.model.CustomerType;
+import com.shopflow.model.Money;
+import com.shopflow.model.Order;
+import com.shopflow.model.OrderLine;
+import com.shopflow.model.OrderStatus;
+import com.shopflow.model.TransactionId;
+import com.shopflow.model.discount.StackedDiscount;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
