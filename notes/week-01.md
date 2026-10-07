@@ -56,6 +56,6 @@ graph LR
 - [ ] M. Fowler: "AnemicDomainModel"
 
 ## Deliverables
-- [ ] Design critique: [docs/essays/01-design-critique.md](../docs/essays/01-design-critique.md)
-- [ ] Package dependency diagram: [docs/diagrams/01-package-dependencies.md](../docs/diagrams/01-package-dependencies.md)
+- [x] Design critique: [docs/essays/01-design-critique.md](../docs/essays/01-design-critique.md)
+- [x] Package dependency diagram: [docs/diagrams/01-package-dependencies.md](../docs/diagrams/01-package-dependencies.md)
 - [ ] ShopFlow domain kickoff: [shopflow/README.md](../shopflow/README.md)
