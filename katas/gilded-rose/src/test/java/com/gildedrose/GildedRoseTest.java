@@ -18,49 +18,49 @@ class GildedRoseTest {
         private static final String NAME = "+5 Dexterity Vest";
 
         @Test
-        void sellInDecreasesByOne() {
+        void shouldDecreaseSellInByOneWhenDayPasses() {
             Item item = updatedOnce(new Item(NAME, 10, 20));
 
             assertEquals(9, item.sellIn);
         }
 
         @Test
-        void qualityDecreasesByOneBeforeSellDate() {
+        void shouldDecreaseQualityByOneWhenBeforeSellDate() {
             Item item = updatedOnce(new Item(NAME, 10, 20));
 
             assertEquals(19, item.quality);
         }
 
         @Test
-        void qualityDecreasesByOneOnLastDayBeforeSellDate() {
+        void shouldDecreaseQualityByOneWhenOneDayLeft() {
             Item item = updatedOnce(new Item(NAME, 1, 20));
 
             assertEquals(19, item.quality);
         }
 
         @Test
-        void qualityDegradesTwiceAsFastOnSellDate() {
+        void shouldDecreaseQualityByTwoWhenSellDateReached() {
             Item item = updatedOnce(new Item(NAME, 0, 20));
 
             assertEquals(18, item.quality);
         }
 
         @Test
-        void qualityDegradesTwiceAsFastAfterSellDate() {
+        void shouldDecreaseQualityByTwoWhenSellDatePassed() {
             Item item = updatedOnce(new Item(NAME, -5, 20));
 
             assertEquals(18, item.quality);
         }
 
         @Test
-        void qualityIsNeverNegative() {
+        void shouldNotDecreaseQualityBelowZeroWhenQualityIsZero() {
             Item item = updatedOnce(new Item(NAME, 5, 0));
 
             assertEquals(0, item.quality);
         }
 
         @Test
-        void qualityIsNeverNegativeWhenDegradingTwiceAsFast() {
+        void shouldNotDecreaseQualityBelowZeroWhenDecreasingByTwo() {
             Item item = updatedOnce(new Item(NAME, 0, 1));
 
             assertEquals(0, item.quality);
@@ -73,35 +73,35 @@ class GildedRoseTest {
         private static final String NAME = "Aged Brie";
 
         @Test
-        void sellInDecreasesByOne() {
+        void shouldDecreaseSellInByOneWhenDayPasses() {
             Item item = updatedOnce(new Item(NAME, 2, 0));
 
             assertEquals(1, item.sellIn);
         }
 
         @Test
-        void qualityIncreasesByOneBeforeSellDate() {
+        void shouldIncreaseQualityByOneWhenBeforeSellDate() {
             Item item = updatedOnce(new Item(NAME, 2, 0));
 
             assertEquals(1, item.quality);
         }
 
         @Test
-        void qualityIncreasesTwiceAsFastAfterSellDate() {
+        void shouldIncreaseQualityByTwoWhenSellDateReached() {
             Item item = updatedOnce(new Item(NAME, 0, 10));
 
             assertEquals(12, item.quality);
         }
 
         @Test
-        void qualityIsNeverMoreThanFifty() {
+        void shouldNotIncreaseQualityAboveFiftyWhenQualityIsFifty() {
             Item item = updatedOnce(new Item(NAME, 5, 50));
 
             assertEquals(50, item.quality);
         }
 
         @Test
-        void qualityIsNeverMoreThanFiftyWhenIncreasingTwiceAsFast() {
+        void shouldNotIncreaseQualityAboveFiftyWhenIncreasingByTwo() {
             Item item = updatedOnce(new Item(NAME, 0, 49));
 
             assertEquals(50, item.quality);
@@ -114,21 +114,21 @@ class GildedRoseTest {
         private static final String NAME = "Sulfuras, Hand of Ragnaros";
 
         @Test
-        void neverHasToBeSold() {
+        void shouldNotChangeSellInWhenDayPasses() {
             Item item = updatedOnce(new Item(NAME, 5, 80));
 
             assertEquals(5, item.sellIn);
         }
 
         @Test
-        void qualityNeverChanges() {
+        void shouldNotChangeQualityWhenBeforeSellDate() {
             Item item = updatedOnce(new Item(NAME, 5, 80));
 
             assertEquals(80, item.quality);
         }
 
         @Test
-        void qualityNeverChangesAfterSellDate() {
+        void shouldNotChangeQualityWhenSellDatePassed() {
             Item item = updatedOnce(new Item(NAME, -1, 80));
 
             assertEquals(80, item.quality);
@@ -141,63 +141,63 @@ class GildedRoseTest {
         private static final String NAME = "Backstage passes to a TAFKAL80ETC concert";
 
         @Test
-        void sellInDecreasesByOne() {
+        void shouldDecreaseSellInByOneWhenDayPasses() {
             Item item = updatedOnce(new Item(NAME, 15, 20));
 
             assertEquals(14, item.sellIn);
         }
 
         @Test
-        void qualityIncreasesByOneWhenMoreThanTenDaysLeft() {
+        void shouldIncreaseQualityByOneWhenMoreThanTenDaysLeft() {
             Item item = updatedOnce(new Item(NAME, 11, 20));
 
             assertEquals(21, item.quality);
         }
 
         @Test
-        void qualityIncreasesByTwoWhenTenDaysLeft() {
+        void shouldIncreaseQualityByTwoWhenTenDaysLeft() {
             Item item = updatedOnce(new Item(NAME, 10, 20));
 
             assertEquals(22, item.quality);
         }
 
         @Test
-        void qualityIncreasesByTwoWhenSixDaysLeft() {
+        void shouldIncreaseQualityByTwoWhenSixDaysLeft() {
             Item item = updatedOnce(new Item(NAME, 6, 20));
 
             assertEquals(22, item.quality);
         }
 
         @Test
-        void qualityIncreasesByThreeWhenFiveDaysLeft() {
+        void shouldIncreaseQualityByThreeWhenFiveDaysLeft() {
             Item item = updatedOnce(new Item(NAME, 5, 20));
 
             assertEquals(23, item.quality);
         }
 
         @Test
-        void qualityIncreasesByThreeWhenOneDayLeft() {
+        void shouldIncreaseQualityByThreeWhenOneDayLeft() {
             Item item = updatedOnce(new Item(NAME, 1, 20));
 
             assertEquals(23, item.quality);
         }
 
         @Test
-        void qualityDropsToZeroAfterConcert() {
+        void shouldDropQualityToZeroWhenConcertPassed() {
             Item item = updatedOnce(new Item(NAME, 0, 20));
 
             assertEquals(0, item.quality);
         }
 
         @Test
-        void qualityIsNeverMoreThanFiftyWhenIncreasingByTwo() {
+        void shouldNotIncreaseQualityAboveFiftyWhenIncreasingByTwo() {
             Item item = updatedOnce(new Item(NAME, 10, 49));
 
             assertEquals(50, item.quality);
         }
 
         @Test
-        void qualityIsNeverMoreThanFiftyWhenIncreasingByThree() {
+        void shouldNotIncreaseQualityAboveFiftyWhenIncreasingByThree() {
             Item item = updatedOnce(new Item(NAME, 5, 48));
 
             assertEquals(50, item.quality);
@@ -205,7 +205,7 @@ class GildedRoseTest {
     }
 
     @Test
-    void updatesEveryItem() {
+    void shouldUpdateEveryItemWhenInventoryHasManyItems() {
         Item vest = new Item("+5 Dexterity Vest", 10, 20);
         Item brie = new Item("Aged Brie", 2, 0);
 
