@@ -11,7 +11,7 @@ Working through [ood-guide.md](ood-guide.md) (middle → senior Java backend).
 3. [x] **Kata 2: Tennis Refactoring or Trip Service** → `katas/`
    - Tennis: untangle conditionals into readable code
    - Trip Service: break hard dependencies so the code becomes testable
-4. [ ] **Reflect:** fill in the reflection → [notes/week-02.md](notes/week-02.md)
+4. [x] **Reflect:** fill in the reflection → [notes/week-02.md](notes/week-02.md)
 5. [ ] **Send** the links to your mentor a day before the session.
 
 **Carried over from Week 1:** [ ] send the Week 1 links to your mentor.
