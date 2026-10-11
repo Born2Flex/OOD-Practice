@@ -5,10 +5,10 @@ Working through [ood-guide.md](ood-guide.md) (middle → senior Java backend).
 ## Current: Week 2, code smells, safe refactoring, refactoring to patterns
 
 1. [ ] **Read** *Refactoring* (Fowler, 2nd ed.) Ch. 1–3, and *Refactoring to Patterns* (Kerievsky) Ch. 1–4 plus: Replace Conditional Logic with Strategy, Replace State-Altering Conditionals with State, Move Embellishment to Decorator, Replace Constructors with Creation Methods, Extract Composite, Replace Implicit Tree with Composite, Introduce Null Object.
-2. [ ] **Kata 1: Gilded Rose** → `katas/gilded-rose/`
+2. [x] **Kata 1: Gilded Rose** → `katas/gilded-rose/`
    - pin the current behaviour with characterization tests first
    - refactor towards polymorphism (Strategy / State), one small commit per step
-3. [ ] **Kata 2: Tennis Refactoring or Trip Service** → `katas/`
+3. [x] **Kata 2: Tennis Refactoring or Trip Service** → `katas/`
    - Tennis: untangle conditionals into readable code
    - Trip Service: break hard dependencies so the code becomes testable
 4. [ ] **Reflect:** fill in the reflection → [notes/week-02.md](notes/week-02.md)
