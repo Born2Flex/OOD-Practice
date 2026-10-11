@@ -204,6 +204,61 @@ class GildedRoseTest {
         }
     }
 
+    @Nested
+    class Conjured {
+
+        private static final String NAME = "Conjured Mana Cake";
+
+        @Test
+        void shouldDecreaseSellInByOneWhenDayPasses() {
+            Item item = updatedOnce(new Item(NAME, 3, 6));
+
+            assertEquals(2, item.sellIn);
+        }
+
+        @Test
+        void shouldDecreaseQualityByTwoWhenBeforeSellDate() {
+            Item item = updatedOnce(new Item(NAME, 3, 6));
+
+            assertEquals(4, item.quality);
+        }
+
+        @Test
+        void shouldDecreaseQualityByFourWhenSellDateReached() {
+            Item item = updatedOnce(new Item(NAME, 0, 10));
+
+            assertEquals(6, item.quality);
+        }
+
+        @Test
+        void shouldDecreaseQualityByFourWhenSellDatePassed() {
+            Item item = updatedOnce(new Item(NAME, -5, 10));
+
+            assertEquals(6, item.quality);
+        }
+
+        @Test
+        void shouldNotDecreaseQualityBelowZeroWhenQualityIsZero() {
+            Item item = updatedOnce(new Item(NAME, 5, 0));
+
+            assertEquals(0, item.quality);
+        }
+
+        @Test
+        void shouldNotDecreaseQualityBelowZeroWhenDecreasingByFour() {
+            Item item = updatedOnce(new Item(NAME, 0, 3));
+
+            assertEquals(0, item.quality);
+        }
+
+        @Test
+        void shouldDecreaseQualityByTwoWhenNameStartsWithConjured() {
+            Item item = updatedOnce(new Item("Conjured Sword", 5, 10));
+
+            assertEquals(8, item.quality);
+        }
+    }
+
     @Test
     void shouldUpdateEveryItemWhenInventoryHasManyItems() {
         Item vest = new Item("+5 Dexterity Vest", 10, 20);

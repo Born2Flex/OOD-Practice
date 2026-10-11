@@ -11,6 +11,7 @@ class GildedRose {
                 new SulfurasStrategy(),
                 new AgedBrieStrategy(),
                 new BackstagePassStrategy(),
+                new ConjuredStrategy(),
                 new RegularStrategy()));
     }
 
