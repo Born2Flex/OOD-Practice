@@ -2,25 +2,24 @@
 
 Working through [ood-guide.md](ood-guide.md) (middle → senior Java backend).
 
-## Current: Week 1, design principles beyond SOLID + ShopFlow kickoff
+## Current: Week 2, code smells, safe refactoring, refactoring to patterns
 
-1. [x] **Read** *Clean Architecture* Part IV, Larman Ch. 17, 18, 25 (GRASP), connascence.io, and Fowler's "TellDontAsk" and "AnemicDomainModel".
-2. [x] **Pick** one real module from a company project for steps 3–4.
-3. [x] **Draw** its package dependencies, mark the cycles, and compute I = Ce / (Ca + Ce) for the main packages → [docs/diagrams/01-package-dependencies.md](docs/diagrams/01-package-dependencies.md)
-4. [x] **Write** a 1–2 page critique of the module (GRASP, connascence, component principles) with fixes ranked by value → [docs/essays/01-design-critique.md](docs/essays/01-design-critique.md)
-5. [x] **Code** in `shopflow/`:
-   - pricing and discounts (Strategy + Composite + Specification)
-   - order lifecycle (State, or a sealed type + `switch`)
-   - notifications (Observer via Spring events)
-   - payment providers (Adapter + Factory)
-6. [x] **Justify** each pattern choice in 1–2 sentences, including where you chose *not* to use one → [shopflow/README.md](shopflow/README.md)
-7. [x] **Reflect:** fill in the reflection and prep questions → [notes/week-01.md](notes/week-01.md)
-8. [ ] **Send** the links to your mentor a day before the session.
+1. [ ] **Read** *Refactoring* (Fowler, 2nd ed.) Ch. 1–3, and *Refactoring to Patterns* (Kerievsky) Ch. 1–4 plus: Replace Conditional Logic with Strategy, Replace State-Altering Conditionals with State, Move Embellishment to Decorator, Replace Constructors with Creation Methods, Extract Composite, Replace Implicit Tree with Composite, Introduce Null Object.
+2. [ ] **Kata 1: Gilded Rose** → `katas/gilded-rose/`
+   - pin the current behaviour with characterization tests first
+   - refactor towards polymorphism (Strategy / State), one small commit per step
+3. [ ] **Kata 2: Tennis Refactoring or Trip Service** → `katas/`
+   - Tennis: untangle conditionals into readable code
+   - Trip Service: break hard dependencies so the code becomes testable
+4. [ ] **Reflect:** fill in the reflection → [notes/week-02.md](notes/week-02.md)
+5. [ ] **Send** the links to your mentor a day before the session.
+
+**Carried over from Week 1:** [ ] send the Week 1 links to your mentor.
 
 ## Progress
 | Week | Topic | Done |
 |------|-------|------|
-| 1 | Design principles beyond SOLID + ShopFlow kickoff | [ ] |
+| 1 | Design principles beyond SOLID + ShopFlow kickoff | [x] |
 | 2 | Code smells, refactoring to patterns | [ ] |
 | 3 | Legacy code, changing without breaking the design | [ ] |
 | 4 | PoEAA: layering, domain logic, O-R mapping | [ ] |
