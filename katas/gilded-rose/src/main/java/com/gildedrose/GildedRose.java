@@ -1,5 +1,8 @@
 package com.gildedrose;
 
+import com.gildedrose.strategy.ItemStrategies;
+import com.gildedrose.strategy.ItemStrategy;
+
 import java.util.List;
 
 class GildedRose {
@@ -7,12 +10,7 @@ class GildedRose {
     private final List<ItemStrategy> strategies;
 
     public GildedRose(Item[] items) {
-        this(items, List.of(
-                new SulfurasStrategy(),
-                new AgedBrieStrategy(),
-                new BackstagePassStrategy(),
-                new ConjuredStrategy(),
-                new RegularStrategy()));
+        this(items, ItemStrategies.defaults());
     }
 
     public GildedRose(Item[] items, List<ItemStrategy> strategies) {

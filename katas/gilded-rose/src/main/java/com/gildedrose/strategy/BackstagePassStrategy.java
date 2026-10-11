@@ -1,4 +1,6 @@
-package com.gildedrose;
+package com.gildedrose.strategy;
+
+import com.gildedrose.Item;
 
 class BackstagePassStrategy implements ItemStrategy {
 
