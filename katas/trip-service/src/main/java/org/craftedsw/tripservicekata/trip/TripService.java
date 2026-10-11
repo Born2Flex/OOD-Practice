@@ -17,10 +17,8 @@ public class TripService {
 	}
 
 	public List<Trip> getTripsByUser(User user) {
-		User loggedUser = loggedUserProvider.loggedUser();
-		if (loggedUser == null) {
-			throw new UserNotLoggedInException();
-		}
+		User loggedUser = loggedUserProvider.loggedUser()
+				.orElseThrow(UserNotLoggedInException::new);
 		return user.isFriendsWith(loggedUser)
 				? tripRepository.tripsBy(user)
 				: List.of();

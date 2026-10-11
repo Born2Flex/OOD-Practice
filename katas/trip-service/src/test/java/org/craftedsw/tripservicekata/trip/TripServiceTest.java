@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.craftedsw.tripservicekata.exception.UserNotLoggedInException;
 import org.craftedsw.tripservicekata.user.User;
@@ -12,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 class TripServiceTest {
 
-	private static final User GUEST = null;
 	private static final Trip TO_LONDON = new Trip();
 	private static final Trip TO_PARIS = new Trip();
 
@@ -22,7 +22,7 @@ class TripServiceTest {
 
 	@Test
 	void throwsWhenNoUserIsLoggedIn() {
-		assertThatThrownBy(() -> loggedInAs(GUEST).getTripsByUser(anotherUser))
+		assertThatThrownBy(() -> asGuest().getTripsByUser(anotherUser))
 				.isInstanceOf(UserNotLoggedInException.class);
 	}
 
@@ -83,8 +83,12 @@ class TripServiceTest {
 		assertThat(loggedInAs(loggedUser).getTripsByUser(anotherUser)).isEmpty();
 	}
 
+	private TripService asGuest() {
+		return new TripService(Optional::empty, this::loadTrips);
+	}
+
 	private TripService loggedInAs(User user) {
-		return new TripService(() -> user, this::loadTrips);
+		return new TripService(() -> Optional.of(user), this::loadTrips);
 	}
 
 	private List<Trip> loadTrips(User user) {

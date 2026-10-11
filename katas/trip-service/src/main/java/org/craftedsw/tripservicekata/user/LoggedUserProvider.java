@@ -1,7 +1,9 @@
 package org.craftedsw.tripservicekata.user;
 
+import java.util.Optional;
+
 public interface LoggedUserProvider {
 
-	User loggedUser();
+	Optional<User> loggedUser();
 
 }
