@@ -4,7 +4,7 @@ Working through [ood-guide.md](ood-guide.md) (middle → senior Java backend).
 
 ## Current: Week 1, design principles beyond SOLID + ShopFlow kickoff
 
-1. [ ] **Read** *Clean Architecture* Part IV, Larman Ch. 17, 18, 25 (GRASP), connascence.io, and Fowler's "TellDontAsk" and "AnemicDomainModel".
+1. [x] **Read** *Clean Architecture* Part IV, Larman Ch. 17, 18, 25 (GRASP), connascence.io, and Fowler's "TellDontAsk" and "AnemicDomainModel".
 2. [x] **Pick** one real module from a company project for steps 3–4.
 3. [x] **Draw** its package dependencies, mark the cycles, and compute I = Ce / (Ca + Ce) for the main packages → [docs/diagrams/01-package-dependencies.md](docs/diagrams/01-package-dependencies.md)
 4. [x] **Write** a 1–2 page critique of the module (GRASP, connascence, component principles) with fixes ranked by value → [docs/essays/01-design-critique.md](docs/essays/01-design-critique.md)

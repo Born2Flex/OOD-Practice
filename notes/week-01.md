@@ -49,11 +49,11 @@ graph LR
   -
 
 ## Reading log
-- [ ] *Clean Architecture*: Part IV (Component Principles)
-- [ ] *Applying UML and Patterns*: Ch. 17, 18, 25 (GRASP)
-- [ ] connascence.io: full taxonomy
-- [ ] M. Fowler: "TellDontAsk"
-- [ ] M. Fowler: "AnemicDomainModel"
+- [x] *Clean Architecture*: Part IV (Component Principles)
+- [x] *Applying UML and Patterns*: Ch. 17, 18, 25 (GRASP)
+- [x] connascence.io: full taxonomy
+- [x] M. Fowler: "TellDontAsk"
+- [x] M. Fowler: "AnemicDomainModel"
 
 ## Deliverables
 - [x] Design critique: [docs/essays/01-design-critique.md](../docs/essays/01-design-critique.md)
