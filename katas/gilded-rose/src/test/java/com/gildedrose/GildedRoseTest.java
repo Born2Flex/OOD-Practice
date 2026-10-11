@@ -134,4 +134,84 @@ class GildedRoseTest {
             assertEquals(80, item.quality);
         }
     }
+
+    @Nested
+    class BackstagePass {
+
+        private static final String NAME = "Backstage passes to a TAFKAL80ETC concert";
+
+        @Test
+        void sellInDecreasesByOne() {
+            Item item = updatedOnce(new Item(NAME, 15, 20));
+
+            assertEquals(14, item.sellIn);
+        }
+
+        @Test
+        void qualityIncreasesByOneWhenMoreThanTenDaysLeft() {
+            Item item = updatedOnce(new Item(NAME, 11, 20));
+
+            assertEquals(21, item.quality);
+        }
+
+        @Test
+        void qualityIncreasesByTwoWhenTenDaysLeft() {
+            Item item = updatedOnce(new Item(NAME, 10, 20));
+
+            assertEquals(22, item.quality);
+        }
+
+        @Test
+        void qualityIncreasesByTwoWhenSixDaysLeft() {
+            Item item = updatedOnce(new Item(NAME, 6, 20));
+
+            assertEquals(22, item.quality);
+        }
+
+        @Test
+        void qualityIncreasesByThreeWhenFiveDaysLeft() {
+            Item item = updatedOnce(new Item(NAME, 5, 20));
+
+            assertEquals(23, item.quality);
+        }
+
+        @Test
+        void qualityIncreasesByThreeWhenOneDayLeft() {
+            Item item = updatedOnce(new Item(NAME, 1, 20));
+
+            assertEquals(23, item.quality);
+        }
+
+        @Test
+        void qualityDropsToZeroAfterConcert() {
+            Item item = updatedOnce(new Item(NAME, 0, 20));
+
+            assertEquals(0, item.quality);
+        }
+
+        @Test
+        void qualityIsNeverMoreThanFiftyWhenIncreasingByTwo() {
+            Item item = updatedOnce(new Item(NAME, 10, 49));
+
+            assertEquals(50, item.quality);
+        }
+
+        @Test
+        void qualityIsNeverMoreThanFiftyWhenIncreasingByThree() {
+            Item item = updatedOnce(new Item(NAME, 5, 48));
+
+            assertEquals(50, item.quality);
+        }
+    }
+
+    @Test
+    void updatesEveryItem() {
+        Item vest = new Item("+5 Dexterity Vest", 10, 20);
+        Item brie = new Item("Aged Brie", 2, 0);
+
+        new GildedRose(new Item[]{vest, brie}).updateQuality();
+
+        assertEquals(19, vest.quality);
+        assertEquals(1, brie.quality);
+    }
 }
