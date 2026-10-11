@@ -66,4 +66,72 @@ class GildedRoseTest {
             assertEquals(0, item.quality);
         }
     }
+
+    @Nested
+    class AgedBrie {
+
+        private static final String NAME = "Aged Brie";
+
+        @Test
+        void sellInDecreasesByOne() {
+            Item item = updatedOnce(new Item(NAME, 2, 0));
+
+            assertEquals(1, item.sellIn);
+        }
+
+        @Test
+        void qualityIncreasesByOneBeforeSellDate() {
+            Item item = updatedOnce(new Item(NAME, 2, 0));
+
+            assertEquals(1, item.quality);
+        }
+
+        @Test
+        void qualityIncreasesTwiceAsFastAfterSellDate() {
+            Item item = updatedOnce(new Item(NAME, 0, 10));
+
+            assertEquals(12, item.quality);
+        }
+
+        @Test
+        void qualityIsNeverMoreThanFifty() {
+            Item item = updatedOnce(new Item(NAME, 5, 50));
+
+            assertEquals(50, item.quality);
+        }
+
+        @Test
+        void qualityIsNeverMoreThanFiftyWhenIncreasingTwiceAsFast() {
+            Item item = updatedOnce(new Item(NAME, 0, 49));
+
+            assertEquals(50, item.quality);
+        }
+    }
+
+    @Nested
+    class Sulfuras {
+
+        private static final String NAME = "Sulfuras, Hand of Ragnaros";
+
+        @Test
+        void neverHasToBeSold() {
+            Item item = updatedOnce(new Item(NAME, 5, 80));
+
+            assertEquals(5, item.sellIn);
+        }
+
+        @Test
+        void qualityNeverChanges() {
+            Item item = updatedOnce(new Item(NAME, 5, 80));
+
+            assertEquals(80, item.quality);
+        }
+
+        @Test
+        void qualityNeverChangesAfterSellDate() {
+            Item item = updatedOnce(new Item(NAME, -1, 80));
+
+            assertEquals(80, item.quality);
+        }
+    }
 }
