@@ -14,7 +14,7 @@ Working through [ood-guide.md](ood-guide.md) (middle → senior Java backend).
    - notifications (Observer via Spring events)
    - payment providers (Adapter + Factory)
 6. [x] **Justify** each pattern choice in 1–2 sentences, including where you chose *not* to use one → [shopflow/README.md](shopflow/README.md)
-7. [ ] **Reflect:** fill in the reflection and prep questions → [notes/week-01.md](notes/week-01.md)
+7. [x] **Reflect:** fill in the reflection and prep questions → [notes/week-01.md](notes/week-01.md)
 8. [ ] **Send** the links to your mentor a day before the session.
 
 ## Progress
