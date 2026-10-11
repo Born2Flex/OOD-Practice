@@ -42,6 +42,14 @@ class TripServiceTest {
 	}
 
 	@Test
+	void returnsUnmodifiableEmptyListWhenUsersAreNotFriends() {
+		List<Trip> trips = loggedInAs(loggedUser).getTripsByUser(anotherUser);
+
+		assertThatThrownBy(() -> trips.add(TO_LONDON))
+				.isInstanceOf(UnsupportedOperationException.class);
+	}
+
+	@Test
 	void doesNotLoadTripsWhenUsersAreNotFriends() {
 		anotherUser.addFriend(new User());
 
