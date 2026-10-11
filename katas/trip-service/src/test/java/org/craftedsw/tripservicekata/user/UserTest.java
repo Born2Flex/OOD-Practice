@@ -35,6 +35,30 @@ class UserTest {
 	}
 
 	@Test
+	void isNotFriendsWithAnyoneByDefault() {
+		assertThat(user.isFriendsWith(new User())).isFalse();
+	}
+
+	@Test
+	void isFriendsWithAddedFriend() {
+		User bob = new User();
+
+		user.addFriend(new User());
+		user.addFriend(bob);
+
+		assertThat(user.isFriendsWith(bob)).isTrue();
+	}
+
+	@Test
+	void isNotFriendsWithUserWhoAddedThemAsFriend() {
+		User bob = new User();
+
+		bob.addFriend(user);
+
+		assertThat(user.isFriendsWith(bob)).isFalse();
+	}
+
+	@Test
 	void hasNoTripsByDefault() {
 		assertThat(user.trips()).isEmpty();
 	}
