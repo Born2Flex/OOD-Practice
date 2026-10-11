@@ -2,16 +2,13 @@ package org.craftedsw.tripservicekata.trip;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mockStatic;
-import static org.mockito.Mockito.never;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.craftedsw.tripservicekata.exception.UserNotLoggedInException;
 import org.craftedsw.tripservicekata.user.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedStatic;
 
 class TripServiceTest {
 
@@ -21,19 +18,7 @@ class TripServiceTest {
 
 	private final User loggedUser = new User();
 	private final User anotherUser = new User();
-
-	private MockedStatic<TripDAO> tripDaoStatic;
-
-	@BeforeEach
-	void setUp() {
-		tripDaoStatic = mockStatic(TripDAO.class);
-		tripDaoStatic.when(() -> TripDAO.findTripsByUser(any())).thenAnswer(call -> call.<User>getArgument(0).trips());
-	}
-
-	@AfterEach
-	void tearDown() {
-		tripDaoStatic.close();
-	}
+	private final List<User> usersWithLoadedTrips = new ArrayList<>();
 
 	@Test
 	void throwsWhenNoUserIsLoggedIn() {
@@ -62,7 +47,7 @@ class TripServiceTest {
 
 		loggedInAs(loggedUser).getTripsByUser(anotherUser);
 
-		tripDaoStatic.verify(() -> TripDAO.findTripsByUser(any()), never());
+		assertThat(usersWithLoadedTrips).isEmpty();
 	}
 
 	@Test
@@ -91,6 +76,11 @@ class TripServiceTest {
 	}
 
 	private TripService loggedInAs(User user) {
-		return new TripService(() -> user);
+		return new TripService(() -> user, this::loadTrips);
+	}
+
+	private List<Trip> loadTrips(User user) {
+		usersWithLoadedTrips.add(user);
+		return user.trips();
 	}
 }
