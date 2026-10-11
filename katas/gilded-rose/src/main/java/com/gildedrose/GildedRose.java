@@ -8,7 +8,9 @@ class GildedRose {
     private final ItemStrategy defaultStrategy;
 
     public GildedRose(Item[] items) {
-        this(items, List.of(new SulfurasStrategy(), new AgedBrieStrategy()), new RegularStrategy());
+        this(items,
+                List.of(new SulfurasStrategy(), new AgedBrieStrategy(), new BackstagePassStrategy()),
+                new RegularStrategy());
     }
 
     public GildedRose(Item[] items, List<ItemStrategy> strategies, ItemStrategy defaultStrategy) {
